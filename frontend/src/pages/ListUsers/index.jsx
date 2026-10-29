@@ -21,12 +21,31 @@ function ListUsers() {
         getUsers()
     }, [])
 
+
     async function deleteUsers(id) {
-        await api.delete(`/usuarios/${id}`)
+        const confirmed = window.confirm(
+            'Tem certeza de que deseja excluir este usuário?'
+        )
 
-        const updatedUsers = users.filter((user) => user.id !== id)
+        if (!confirmed) {
+            return
+        }
 
-        setUsers(updatedUsers)
+        try {
+            await api.delete(`/usuarios/${id}`)
+
+            const updatedUsers = users.filter((user) => user.id !== id)
+
+            setUsers(updatedUsers)
+        } catch (error) {
+            console.error('Erro ao excluir usuário:', error)
+
+            window.alert('Não foi possível excluir o usuário. Tente novamente.')
+        }
+    }
+
+    function editUser(user) {
+        navigate(`/?id=${user.id}`)
     }
 
     return (
@@ -40,13 +59,23 @@ function ListUsers() {
                 {users.map((user) => (
 
                     <CardUsers key={user.id}>
-                        <AvatarUser src={`https://ui-avatars.com/api/?name=${user.name}`}/>
+                        <AvatarUser src={`https://ui-avatars.com/api/?name=${user.name}`} />
                         <div>
                             <h3>{user.name}</h3>
                             <p>{user.email}</p>
                             <p>{user.age}</p>
                         </div>
-                        <TrashIcon src={Trash} alt="Excluir" onClick={() => deleteUsers(user.id)} />
+                        <div>
+                            <button onClick={() => editUser(user)}>
+                                Editar
+                            </button>
+
+                            <TrashIcon
+                                src={Trash}
+                                alt="Excluir"
+                                onClick={() => deleteUsers(user.id)}
+                            />
+                        </div>
                     </CardUsers>
                 ))}
             </ContainerUsers>

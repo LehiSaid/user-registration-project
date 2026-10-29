@@ -50,6 +50,25 @@ text-align: center;
 font-size: 38px;
 font-style: normal;
 font-weight: 600;
+`
 
+export const Message = styled.div`
+  width: 100%;
+  max-width: 460px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  box-sizing: border-box;
 
+  background-color: ${({ $type }) =>
+    $type === 'success' ? '#d4edda' : '#f8d7da'};
+
+  color: ${({ $type }) =>
+    $type === 'success' ? '#155724' : '#721c24'};
+
+  border: 1px solid
+    ${({ $type }) =>
+      $type === 'success' ? '#c3e6cb' : '#f5c6cb'};
 `
