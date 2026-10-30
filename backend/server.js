@@ -66,6 +66,3 @@ app.put('/usuarios/:id', async (req, res) => {
 
 app.listen(3000)
 
-// req - request - requisição
-// res - response - resposta
-/* lehisaid  b7lFmgmtiJlA0sZp */
