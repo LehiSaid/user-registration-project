@@ -1,8 +1,16 @@
 # User Registration Project
 
-A full-stack web application for user registration and management, developed with React, Node.js, Express, Prisma ORM, and MongoDB.
+A full-stack web application for user registration and management, built with **React, Node.js, Express, Prisma ORM, and MongoDB**.
 
-The project allows users to create, view, edit, and delete registered users through a responsive interface connected to a REST API.
+The application provides a responsive interface where users can create, view, update, and delete registrations. The frontend communicates with a REST API connected to a MongoDB database.
+
+## Live Demo
+
+* **Frontend:** [View Live Application](https://user-registration-project-phi.vercel.app/)
+* **Backend API:** [Access API](https://user-registration-api-lkzu.onrender.com)
+* **Repository:** [GitHub Repository](https://github.com/LehiSaid/user-registration-project)
+
+> **Note:** The backend is hosted on Render's free tier. After a period of inactivity, the service may go to sleep. The first request can take a little longer while the server starts.
 
 ## Technologies
 
@@ -24,14 +32,22 @@ The project allows users to create, view, edit, and delete registered users thro
 * MongoDB
 * REST API
 
+### Deployment
+
+* Vercel — Frontend hosting
+* Render — Backend hosting
+* MongoDB Atlas — Database hosting
+
 ## Features
 
 * Create new user registrations.
-* Display a list of registered users.
+* Display registered users.
 * Edit existing user information.
-* Delete users with confirmation.
+* Delete users.
 * Validate form fields before submission.
 * Display success and error feedback messages.
+* Show loading states while retrieving user data.
+* Handle API connection errors with a retry option.
 * Integrate frontend and backend through HTTP requests.
 * Store user information in MongoDB.
 
@@ -80,28 +96,33 @@ Make sure you have the following installed:
 
 * Node.js
 * npm
-* MongoDB database
+* A MongoDB database
 
 ### 1. Clone the repository
 
 ```bash
 git clone https://github.com/LehiSaid/user-registration-project.git
+cd user-registration-project
 ```
 
 ### 2. Set up the backend
 
 ```bash
-cd user-registration-project/backend
+cd backend
 npm install
 ```
 
-Configure your MongoDB connection string in the backend environment file:
+Create a `.env` file inside the `backend` folder and configure your MongoDB connection:
 
 ```env
 DATABASE_URL="your_mongodb_connection_string"
 ```
 
-**Important:** Never commit your `.env` file or expose database credentials in your repository.
+Generate the Prisma Client:
+
+```bash
+npx prisma generate
+```
 
 Start the backend:
 
@@ -111,30 +132,45 @@ npm start
 
 ### 3. Set up the frontend
 
-Open another terminal:
+Open another terminal and navigate to the frontend folder:
 
 ```bash
-cd user-registration-project/frontend
+cd frontend
 npm install
+```
+
+Create a `.env` file inside the `frontend` folder:
+
+```env
+VITE_API_URL=http://localhost:3000
+```
+
+Start the development server:
+
+```bash
 npm run dev
 ```
 
-The frontend development server will provide a local URL, usually:
+The frontend will usually be available at:
 
 ```text
 http://localhost:5173
 ```
 
+> Make sure the backend is running before using the application. The API URL in the frontend environment file must match the port configured in your backend.
+
 ## Learning Objectives
 
-This project was developed to strengthen practical skills in:
+This project helped me develop practical skills in:
 
 * Full-stack web development.
 * React component architecture.
 * State management with React Hooks.
 * REST API development and integration.
 * Database operations using Prisma ORM and MongoDB.
-* CRUD functionality.
+* CRUD operations.
+* Frontend and backend integration.
+* Application deployment.
 * Git and GitHub version control.
 
 ## Author
