@@ -8,8 +8,13 @@ import {
   Form,
   ContainerInputs,
   Input,
-  InputLabel, 
+  InputLabel,
   Message,
+  ChatContainer,
+  ChatHeader,
+  ChatMessages,
+  ChatMessage,
+  ChatForm
 } from './styles'
 
 
@@ -26,6 +31,11 @@ function Home() {
     text: '',
     type: ''
   })
+
+  const [question, setQuestion] = useState('')
+  const [chatMessages, setChatMessages] = useState([])
+  const [loadingAssistant, setLoadingAssistant] = useState(false)
+
   const query = new URLSearchParams(window.location.search)
   const userId = query.get('id')
 
@@ -133,6 +143,45 @@ function Home() {
     }
   }
 
+  async function askAssistant() {
+    const pergunta = question.trim()
+
+    if (!pergunta || loadingAssistant) return
+
+    setChatMessages((prev) => [
+      ...prev,
+      { role: 'user', text: pergunta }
+    ])
+
+    setQuestion('')
+    setLoadingAssistant(true)
+
+    try {
+      const { data } = await api.post('/assistente/usuarios', {
+        pergunta
+      })
+
+      setChatMessages((prev) => [
+        ...prev,
+        { role: 'assistant', text: data.resposta }
+      ])
+
+    } catch (error) {
+      console.error('Erro ao consultar assistente:', error)
+
+      setChatMessages((prev) => [
+        ...prev,
+        {
+          role: 'assistant',
+          text: 'Não foi possível obter uma resposta. Tente novamente.'
+        }
+      ])
+
+    } finally {
+      setLoadingAssistant(false)
+    }
+  }
+
   return (
     <Container>
       <TopBackground />
@@ -176,6 +225,55 @@ function Home() {
         </Button>
 
       </Form>
+
+      <ChatContainer>
+  <ChatHeader>
+    <h3>Assistente de Usuários 🤖</h3>
+    <span>ONLINE</span>
+  </ChatHeader>
+
+  <ChatMessages>
+    {chatMessages.length === 0 && (
+      <ChatMessage $role="assistant">
+        Olá! Faça uma pergunta sobre os usuários cadastrados.
+      </ChatMessage>
+    )}
+
+    {chatMessages.map((msg, index) => (
+      <ChatMessage key={index} $role={msg.role}>
+        {msg.text}
+      </ChatMessage>
+    ))}
+
+    {loadingAssistant && (
+      <ChatMessage $role="assistant">
+        Consultando...
+      </ChatMessage>
+    )}
+  </ChatMessages>
+
+  <ChatForm
+    onSubmit={(event) => {
+      event.preventDefault()
+      askAssistant()
+    }}
+  >
+    <input
+      type="text"
+      placeholder="Ex.: Qual é a média de idade?"
+      value={question}
+      onChange={(event) => setQuestion(event.target.value)}
+      disabled={loadingAssistant}
+    />
+
+    <button
+      type="submit"
+      disabled={!question.trim() || loadingAssistant}
+    >
+      {loadingAssistant ? 'Aguarde...' : 'Enviar'}
+    </button>
+  </ChatForm>
+</ChatContainer>
 
       <Button type='button' onClick={() => navigate('/lista-de-usuarios')}>
         Ver Lista de Usuários
