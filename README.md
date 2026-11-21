@@ -2,54 +2,68 @@
 
 A full-stack web application for user registration and management, built with **React, Node.js, Express, Prisma ORM, and MongoDB**.
 
-The application provides a responsive interface where users can create, view, update, and delete registrations. The frontend communicates with a REST API connected to a MongoDB database.
+The application provides a responsive interface where users can create, view, update, and delete registrations. It also includes an interactive assistant that answers questions about registered users using real database information.
+
+The frontend communicates with a REST API connected to a MongoDB database.
 
 ## Live Demo
 
-* **Frontend:** [View Live Application](https://user-registration-project-phi.vercel.app/)
-* **Backend API:** [Access API](https://user-registration-api-lkzu.onrender.com)
-* **Repository:** [GitHub Repository](https://github.com/LehiSaid/user-registration-project)
+- **Frontend:** [View Live Application](https://user-registration-project-phi.vercel.app/)
+- **Backend API:** [Access API](https://user-registration-api-lkzu.onrender.com)
+- **Repository:** [GitHub Repository](https://github.com/LehiSaid/user-registration-project)
 
 > **Note:** The backend is hosted on Render's free tier. After a period of inactivity, the service may go to sleep. The first request can take a little longer while the server starts.
 
 ## Technologies
 
 ### Frontend
-
-* React
-* JavaScript
-* Vite
-* React Router
-* Axios
-* Styled Components
-* CSS
+- React
+- JavaScript
+- Vite
+- React Router
+- Axios
+- Styled Components
+- CSS
 
 ### Backend
-
-* Node.js
-* Express.js
-* Prisma ORM
-* MongoDB
-* REST API
+- Node.js
+- Express.js
+- Prisma ORM
+- MongoDB
+- OpenAI SDK
+- REST API
 
 ### Deployment
-
-* Vercel — Frontend hosting
-* Render — Backend hosting
-* MongoDB Atlas — Database hosting
+- Vercel — Frontend hosting
+- Render — Backend hosting
+- MongoDB Atlas — Database hosting
 
 ## Features
 
-* Create new user registrations.
-* Display registered users.
-* Edit existing user information.
-* Delete users.
-* Validate form fields before submission.
-* Display success and error feedback messages.
-* Show loading states while retrieving user data.
-* Handle API connection errors with a retry option.
-* Integrate frontend and backend through HTTP requests.
-* Store user information in MongoDB.
+### User Management
+- Create new user registrations.
+- Display registered users.
+- Edit existing user information.
+- Delete users.
+- Validate form fields before submission.
+- Display success and error feedback messages.
+- Show loading states while retrieving user data.
+- Handle API connection errors with a retry option.
+- Store user information in MongoDB.
+
+### User Assistant
+
+The application includes an interactive assistant that answers questions about registered users.
+
+Currently, the assistant supports five types of queries:
+
+- Total number of registered users.
+- Average age of registered users.
+- Number of users over 18.
+- Identification of the oldest user.
+- Identification of the youngest user.
+
+**Demo Mode:** The assistant currently uses JavaScript-based rules to interpret questions and generate responses using real database information. It does not currently use generative AI.
 
 ## Project Structure
 
@@ -81,12 +95,13 @@ user-registration-project/
 
 The backend provides the following REST API endpoints:
 
-| Method | Endpoint        | Description             |
-| ------ | --------------- | ----------------------- |
-| GET    | `/usuarios`     | Retrieve all users      |
-| POST   | `/usuarios`     | Create a new user       |
-| PUT    | `/usuarios/:id` | Update an existing user |
-| DELETE | `/usuarios/:id` | Delete a user           |
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/usuarios` | Retrieve all users |
+| POST | `/usuarios` | Create a new user |
+| PUT | `/usuarios/:id` | Update an existing user |
+| DELETE | `/usuarios/:id` | Delete a user |
+| POST | `/assistente/usuarios` | Ask the user assistant a question |
 
 ## Getting Started
 
@@ -94,9 +109,9 @@ The backend provides the following REST API endpoints:
 
 Make sure you have the following installed:
 
-* Node.js
-* npm
-* A MongoDB database
+- Node.js
+- npm
+- A MongoDB database
 
 ### 1. Clone the repository
 
@@ -116,6 +131,7 @@ Create a `.env` file inside the `backend` folder and configure your MongoDB conn
 
 ```env
 DATABASE_URL="your_mongodb_connection_string"
+AI_DEMO_MODE=true
 ```
 
 Generate the Prisma Client:
@@ -157,31 +173,4 @@ The frontend will usually be available at:
 http://localhost:5173
 ```
 
-> Make sure the backend is running before using the application. The API URL in the frontend environment file must match the port configured in your backend.
-
-## Learning Objectives
-
-This project helped me develop practical skills in:
-
-* Full-stack web development.
-* React component architecture.
-* State management with React Hooks.
-* REST API development and integration.
-* Database operations using Prisma ORM and MongoDB.
-* CRUD operations.
-* Frontend and backend integration.
-* Application deployment.
-* Git and GitHub version control.
-
-## Author
-
-**Lehi da Silva Said**
-
-Full-Stack Developer in training.
-
-* GitHub: [@LehiSaid](https://github.com/LehiSaid)
-* LinkedIn: [Lehi Said](https://linkedin.com/in/lehisaid)
-
----
-
-*This project is part of my professional development portfolio.*
+> Make sure
