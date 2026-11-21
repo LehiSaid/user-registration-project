@@ -15,9 +15,13 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "mongodb": "^7.2.0"
+    "mongodb": "^7.2.0",
+    "openai": "^7.60.0"
   },
   "devDependencies": {
     "prisma": "^6.19.3"
+  },
+  "overrides": {
+    "deepmerge-ts": "^8.0.0"
   }
 }
