@@ -25,6 +25,17 @@ The frontend communicates with a REST API connected to a MongoDB database.
 ### User Assistant
 ![User Assistant](screenshots/assistant.png)
 
+## Screenshots
+
+### Home Page
+![Home Page](screenshots/home.png)
+
+### Users List
+![Users List](screenshots/users-list.png)
+
+### User Assistant
+![User Assistant](screenshots/assistant.png)
+
 ## Technologies
 
 ### Frontend
