@@ -14,16 +14,6 @@ The frontend communicates with a REST API connected to a MongoDB database.
 
 > **Note:** The backend is hosted on Render's free tier. After a period of inactivity, the service may go to sleep. The first request can take a little longer while the server starts.
 >
-## Screenshots
-
-### Home Page
-![Home Page](screenshots/home.png)
-
-### Users List
-![Users List](screenshots/users-list.png)
-
-### User Assistant
-![User Assistant](screenshots/assistant.png)
 
 ## Screenshots
 
